@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 
 //Method to send email to a user
-var sendEmail = function (to, subject, text) {
+var SendEmail = function (to, subject, text) {
     var mailOptions = {
         to: to,
         subject: subject,

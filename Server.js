@@ -1,7 +1,4 @@
-var testdb=require('./FrameWork/FW_DBManager');
-var qu=["CREATE TABLE customers (name VARCHAR(255), address VARCHAR(255))","CREATE TABLE customers2 (name VARCHAR(255), address VARCHAR(255))","CREATE TABLE customers3 (name VARCHAR(255), address VARCHAR(255))"]
-testdb.SetupTables(qu);
-
+var mailVerification=require('./FrameWork/UserVerification/FW_MailVerification');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -9,9 +6,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var app = express();
 const routes = require('./routes/routes');
-const DatabaseSystem = require('./API/DatabaseManager/DBmanager.js');
 var serverSettings = require('./API/Strings/ServerSettings');
-
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 app.use(logger('dev'));
@@ -19,6 +14,13 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// to setup the name of the database and change server settings change details in server settings
+
+//uncomment 2 lines bellow if you want email verification
+//app.use('/checkVerification/:emailid',mailVerification.CheckVerification);
+//app.use('/verifyEmail/:key',mailVerification.UpdateVerification);
+
+// to verify mail call the funtion SendVerificationmail in FW_MailVerification.js
 
 app.use('/', routes);
 // catch 404 and forward to error handler
@@ -31,7 +33,6 @@ app.use(function(err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
-  
   // render the error page
   res.status(err.status || 500);
   res.render('error');

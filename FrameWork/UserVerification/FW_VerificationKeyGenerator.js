@@ -14,5 +14,4 @@ const generateKey = () => {
     expires.setHours(expires.getHours() + 6); //expires 6 hours after current time
     return {key, expires}
 }
-
-module.exports = { generateKey }
+module.exports = { generateKey}

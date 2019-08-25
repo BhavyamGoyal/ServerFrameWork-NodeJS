@@ -3,7 +3,7 @@ var serverSettings = require('../API/Strings/ServerSettings');
 //local mysql db connection
 var dbinstance = null;
 class FW_DBManager {
-    constructor(timerUser, turnTime) {
+    constructor() {
 
         this.connection = mysql.createConnection({
             host: serverSettings.host,
@@ -66,6 +66,7 @@ class FW_DBManager {
     }
 
     RunQuery(query) {
+        // data should be null if its not an insert query not using for now
         // function should be called with async await and will return the result from the query event id it is error
         // a function calling this function like this
         /*
