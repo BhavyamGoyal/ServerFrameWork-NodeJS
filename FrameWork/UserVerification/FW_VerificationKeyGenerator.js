@@ -2,7 +2,7 @@ var chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 var expires = new Date();
 
-const generateKey = () => {
+const generateKey =function key(){
     var key = '';
     //Generate 16 digit key
     for (var i = 0; i < 16; ++i) {

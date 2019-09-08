@@ -19,13 +19,13 @@ var SendEmail = function (to, subject, text) {
 
     smtpTransport.sendMail(mailOptions, function (error, response) {
         if (error) {
-            console.log("[EmailController]"+error);
+            console.log("[FW_Mailer]"+error);
             res.end("error");
         } else {
-            console.log("[EmailController]Message sent: " + response.message);
+            console.log("[FW_Mailer]Message sent: " + response);
             res.end("sent");
         }
     });
 }
 
-module.exports = { sendEmail }
+module.exports = { SendEmail }

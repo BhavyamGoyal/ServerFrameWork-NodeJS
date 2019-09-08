@@ -1,5 +1,5 @@
 var mysql = require('mysql');
-var serverSettings = require('../API/Strings/ServerSettings');
+var serverSettings = require('../../API/Strings/ServerSettings');
 //local mysql db connection
 var dbinstance = null;
 class FW_DBManager {
@@ -10,7 +10,7 @@ class FW_DBManager {
             user: serverSettings.user,
             password: serverSettings.password,
         });
-
+        this.CreateDatabase();
         this.connectionPool = mysql.createPool({
             connectionLimit: 10,
             host: serverSettings.host,
@@ -18,9 +18,11 @@ class FW_DBManager {
             password: serverSettings.password,
             database: serverSettings.database
         });
+        
 
     }
     CreateDatabase() {
+        var con=this.connection;
         this.connection.connect(function (err) {
             if (err) {
                 console.log("[FW_DBmanager]*****Database error accored***** : " + err);
@@ -32,7 +34,7 @@ class FW_DBManager {
                     else {
                         console.log("[FW_DBManager] Database connected");
                     }
-                    SetupTables();
+                    //SetupTables();
                 });
             }
         });
@@ -71,11 +73,11 @@ class FW_DBManager {
         // a function calling this function like this
         /*
             async f1(){
-                var result=await thiscalssobj.RunQuery(query);
+                var result= await thiscalssobj.RunQuery(query);
             }
         */
         var q = query;
-        var cb = resultCB;
+        //var cb = resultCB;
         return new Promise(resolve => {
             this.connectionPool.getConnection(function (err, connection) {
                 if (err) {

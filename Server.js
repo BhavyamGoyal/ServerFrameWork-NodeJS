@@ -1,4 +1,3 @@
-var mailVerification=require('./FrameWork/UserVerification/FW_MailVerification');
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
@@ -14,15 +13,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// to setup the name of the database and change server settings change details in server settings
-
-//uncomment 2 lines bellow if you want email verification
-//app.use('/checkVerification/:emailid',mailVerification.CheckVerification);
-//app.use('/verifyEmail/:key',mailVerification.UpdateVerification);
-
-// to verify mail call the funtion SendVerificationmail in FW_MailVerification.js
-
 app.use('/', routes);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));

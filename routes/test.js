@@ -1,6 +1,6 @@
 var express = require('express');
 var router = express.Router();
-var { sendVerificationEmail } = require('../API/EmailSystem/SendVerificationEmail');
+//var { sendVerificationEmail } = require('../API/EmailSystem/SendVerificationEmail');
 
 /* GET home page. */
 router.get('/', function (req, res, next) {
@@ -19,7 +19,7 @@ router.post('/', function (req, res, next) {
 const email = "firststepeduapp@gmail.com";
 
 router.get('/verify', function (req, res, next) {
-    res.send(sendVerificationEmail(email));
+    //res.send(sendVerificationEmail(email));
 });
 
 module.exports = router;
