@@ -10,16 +10,19 @@ routes.get('/checkVerification/:emailid', mailVerification.CheckVerification);
 routes.get('/verifyEmail', mailVerification.UpdateVerification);
 
 // to verify mail call the funtion SendVerificationmail in FW_MailVerification.js while registering user and pass email in it like bellow.
+/*
+routes.post('/RegisterUser', async function (req, res, err) {
 
-// routes.post('/RegisterUser', function (req, res, err) {
-   
-//         console.log("\n\n[routes]RegisterUser Post Request Data " + JSON.stringify(req.body));
-//         mailVerification.SendVerificationEmail(req.body.emailID);
-//         res.send({ message: "email sent" });
-//         //register other parameters in you user table here
-
-// });
-
+    console.log("\n\n[routes]RegisterUser Post Request Data " + JSON.stringify(req.body));
+    var result = await mailVerification.SendVerificationEmail(req.body.emailID);
+    if (result == 1) {
+        res.send({ message: "We Have Sent You an Email. Please Verify Your Email Address" });
+    } else {
+        res.send({ message: "Invalid Email Address" });
+    }
+    //register other parameters in you user table here
+});
+*/
 routes.get('/', function (req, res, next) {
     res.send("1234");
 });

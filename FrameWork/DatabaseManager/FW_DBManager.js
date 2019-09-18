@@ -82,7 +82,7 @@ class FW_DBManager {
             this.connectionPool.getConnection(function (err, connection) {
                 if (err) {
                     console.log("[FW_DBmanager] error while connecting to pool connection" + err);
-                    resolve(err);
+                    resolve(-1);
                     return;
                 } else {
                     connection.query(q, function (err, result) {
@@ -97,7 +97,32 @@ class FW_DBManager {
             });
         });
     }
+
+    InsertData(query,data){
+        var q = query;
+        //var cb = resultCB;
+        return new Promise(resolve => {
+            this.connectionPool.getConnection(function (err, connection) {
+                if (err) {
+                    console.log("[FW_DBmanager] error while connecting to pool connection" + err);
+                    resolve(err);
+                    return;
+                } else {
+                    connection.query(q,data, function (err, result) {
+                        if (err) {
+                            console.log("[FW_DBmanager] error in Create Table Query " + q + " error: " + err);
+                        } else
+                            console.log("[FW_DBmanager] Got some result");
+                        resolve(result);
+                    });
+                }
+                connection.release();
+            });
+        });
+    }
 }
+
+
 
 if (dbinstance == null) {
     dbinstance = new FW_DBManager();
