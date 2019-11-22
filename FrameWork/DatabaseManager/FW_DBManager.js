@@ -87,10 +87,11 @@ class FW_DBManager {
                 } else {
                     connection.query(q, function (err, result) {
                         if (err) {
-                            console.log("[FW_DBmanager] error in Create Table Query " + q + " error: " + err);
+                            console.log("[FW_DBmanager] error in Query " + q + " error: " + err);
+                            resolve(-1);
                         } else
-                            console.log("[FW_DBmanager] Got some result");
-                        resolve(result);
+                            console.log("[FW_DBmanager] Got some result"+JSON.stringify(result));
+                            resolve(result);
                     });
                 }
                 connection.release();

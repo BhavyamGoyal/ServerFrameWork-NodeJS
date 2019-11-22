@@ -3,6 +3,7 @@ const nodemailer = require("nodemailer");
 //Method to send email to a user
 var SendEmail =async function (to, subject, text) {
     return new Promise(resolve => {
+        console.log("[FW_Mailer] mailing to "+to);
         var mailOptions = {
             to: to,
             subject: subject,

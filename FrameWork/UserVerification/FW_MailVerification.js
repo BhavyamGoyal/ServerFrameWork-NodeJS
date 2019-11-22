@@ -39,7 +39,7 @@ async function UpdateVerification(req, res, err) {
     if (result.affectedRows == 1) {
         message = "Your Email Has Been Successfully Verified";
     } else {
-        message = "Email Not Verified/Not Found";
+        message = "Email Not Verified";
     }
     res.send(message);
 }
@@ -65,8 +65,8 @@ const SendResetEmail=async function(emailid){
 }
 
 const SendVerificationEmail = async function(emailId) {
+    console.log("\n\n[FW_MailVerification] sending verification mail"+ JSON.stringify(emailId));
     return new Promise(async function(resolve,reject) {
-        console.log("\n\n[FW_MailVerification] sending verification mail");
         var key = generateKey.generateKey().key;
         var queryParameter = `/?k=${key}`;
         var verificationLink = BASE_URL + queryParameter;
